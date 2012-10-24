@@ -12,12 +12,20 @@
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 
+enum {
+    TagBathRoom,
+    TagRoom,
+    TagDoor,
+    TagBatch,
+    TagYuge,
+    TagKotoba,
+} TagsHelloWorldNode;
+
 // HelloWorldLayer
-@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate>
-{
+@interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate> {
+    CCSpriteBatchNode *batch_;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
-+(CCScene *) scene;
-
++ (CCScene *) scene;
 @end

@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+class DSL
+  module Converter
+    module_function
+
+    def dir=(dir)
+      @@dir = dir
+    end
+
+    def prepare(font, options={})
+      user_font_dir = File.expand_path('~/Library/Fonts')
+      system_font_dir = '/Library/Fonts'
+
+      @@font = File.join(system_font_dir, font)
+      unless File.exists?(@@font)
+        @@font = File.join(user_font_dir, font)
+      end
+
+      @@color   = options[:color] || options[:fill] || '#fefffe'
+      @@size    = options[:size] || options[:pointsize] || 12
+      @@bgcolor = options[:bgcolor] || options[:background] || 'none'
+      @@letter_spacing = options[:letter_spacing] || options[:interword_spacing]
+      @@line_spacing = options[:line_spacing] || options[:interline_spacing]
+    end
+
+    def text_to_image(text, file)
+      path = File.join(@@dir, file)
+
+      options = {
+        :type       => 'TrueColorMatte',
+        :colorspace => 'RGB',
+        :background => @@bgcolor,
+        :fill       => @@color,
+        :font       => @@font,
+        :pointsize  => @@size,
+      }
+
+      options.merge!('interword-spacing' => @@letter_spacing) if @@letter_spacing
+      options.merge!('interline-spacing' => @@line_spacing) if @@line_spacing
+
+      cmd = 'convert ' + options.map{|key, val|
+          "-#{key} '#{val}'"
+      }.join(' ') +
+          " label:'#{text}' #{path}"
+      
+      puts cmd
+      `#{cmd}`
+    end
+  end
+
+  def dir(dir)
+    Converter.dir = dir
+  end
+
+  def font(fontname, options={}, &block)
+    Converter.prepare(fontname, options)
+    block.call
+  end
+end
+
+class Integer
+  def pt
+    to_s
+  end
+end
+
+class String
+  def <<(text)
+    DSL::Converter.text_to_image(text, self)
+  end
+end
+
+source = File.read(ARGV.last)
+DSL.new.instance_eval(source)
