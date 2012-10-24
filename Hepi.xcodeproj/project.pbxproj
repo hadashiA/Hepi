@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		268ABF4D163849AA004417A4 /* Hepi-hd.plist in Resources */ = {isa = PBXBuildFile; fileRef = 268ABF4B163849AA004417A4 /* Hepi-hd.plist */; };
 		268ABF4E163849AA004417A4 /* Hepi-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 268ABF4C163849AA004417A4 /* Hepi-hd.png */; };
+		268ABF5216385239004417A4 /* Hepi.plist in Resources */ = {isa = PBXBuildFile; fileRef = 268ABF5016385239004417A4 /* Hepi.plist */; };
+		268ABF5316385239004417A4 /* Hepi.png in Resources */ = {isa = PBXBuildFile; fileRef = 268ABF5116385239004417A4 /* Hepi.png */; };
 		26D9D67F1638256500F161BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D9D67E1638256500F161BB /* QuartzCore.framework */; };
 		26D9D6811638256500F161BB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D9D6801638256500F161BB /* OpenGLES.framework */; };
 		26D9D6831638256500F161BB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26D9D6821638256500F161BB /* OpenAL.framework */; };
@@ -137,6 +139,8 @@
 /* Begin PBXFileReference section */
 		268ABF4B163849AA004417A4 /* Hepi-hd.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Hepi-hd.plist"; path = "Resources/Hepi-hd.plist"; sourceTree = "<group>"; };
 		268ABF4C163849AA004417A4 /* Hepi-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Hepi-hd.png"; path = "Resources/Hepi-hd.png"; sourceTree = "<group>"; };
+		268ABF5016385239004417A4 /* Hepi.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Hepi.plist; path = Resources/Hepi.plist; sourceTree = "<group>"; };
+		268ABF5116385239004417A4 /* Hepi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Hepi.png; path = Resources/Hepi.png; sourceTree = "<group>"; };
 		26D9D67A1638256500F161BB /* Hepi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hepi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26D9D67E1638256500F161BB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		26D9D6801638256500F161BB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -480,6 +484,8 @@
 				26D9D6AA1638256500F161BB /* Icon@2x.png */,
 				26D9D6AC1638256500F161BB /* Info.plist */,
 				26D9D6AD1638256500F161BB /* iTunesArtwork */,
+				268ABF5016385239004417A4 /* Hepi.plist */,
+				268ABF5116385239004417A4 /* Hepi.png */,
 				268ABF4B163849AA004417A4 /* Hepi-hd.plist */,
 				268ABF4C163849AA004417A4 /* Hepi-hd.png */,
 			);
@@ -898,6 +904,8 @@
 				26D9D7F71638256700F161BB /* ChangeLog in Resources */,
 				268ABF4D163849AA004417A4 /* Hepi-hd.plist in Resources */,
 				268ABF4E163849AA004417A4 /* Hepi-hd.png in Resources */,
+				268ABF5216385239004417A4 /* Hepi.plist in Resources */,
+				268ABF5316385239004417A4 /* Hepi.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,6 +1072,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ryuji Kubota (L3HMXJU7Y4)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1075,6 +1084,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "FE1EB615-08AE-46B7-9FD5-6DB8EB5BC550";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1083,7 +1093,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ryuji Kubota (L3HMXJU7Y4)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Hepi/Prefix.pch;
@@ -1094,6 +1104,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "FE1EB615-08AE-46B7-9FD5-6DB8EB5BC550";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

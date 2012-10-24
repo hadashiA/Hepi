@@ -267,8 +267,8 @@ NSInteger ccLoadFileIntoMemory(const char *filename, unsigned char **out)
 
 	NSInteger device = [self runningDevice];
 
+
 #ifdef __CC_PLATFORM_IOS
-	
 	// iPad HD ?
 	if( device == kCCiPadRetinaDisplay ) {
 		ret = [self getPath:relPath forSuffix:iPadRetinaDisplaySuffix_];
