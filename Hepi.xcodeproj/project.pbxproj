@@ -134,6 +134,8 @@
 		26D9D8161638256700F161BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D9D8151638256700F161BB /* main.m */; };
 		26D9D8191638256700F161BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D9D8181638256700F161BB /* AppDelegate.m */; };
 		26D9D81C1638256700F161BB /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 26D9D81B1638256700F161BB /* HelloWorldLayer.m */; };
+		26F3BD49163994C3004A9FE6 /* door_b_close.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26F3BD47163994C3004A9FE6 /* door_b_close.mp3 */; };
+		26F3BD4A163994C3004A9FE6 /* door_b_open.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26F3BD48163994C3004A9FE6 /* door_b_open.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -404,6 +406,8 @@
 		26D9D8181638256700F161BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		26D9D81A1638256700F161BB /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
 		26D9D81B1638256700F161BB /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
+		26F3BD47163994C3004A9FE6 /* door_b_close.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = door_b_close.mp3; path = Resources/door_b_close.mp3; sourceTree = "<group>"; };
+		26F3BD48163994C3004A9FE6 /* door_b_open.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = door_b_open.mp3; path = Resources/door_b_open.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -488,6 +492,8 @@
 				268ABF5116385239004417A4 /* Hepi.png */,
 				268ABF4B163849AA004417A4 /* Hepi-hd.plist */,
 				268ABF4C163849AA004417A4 /* Hepi-hd.png */,
+				26F3BD47163994C3004A9FE6 /* door_b_close.mp3 */,
+				26F3BD48163994C3004A9FE6 /* door_b_open.mp3 */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -906,6 +912,8 @@
 				268ABF4E163849AA004417A4 /* Hepi-hd.png in Resources */,
 				268ABF5216385239004417A4 /* Hepi.plist in Resources */,
 				268ABF5316385239004417A4 /* Hepi.png in Resources */,
+				26F3BD49163994C3004A9FE6 /* door_b_close.mp3 in Resources */,
+				26F3BD4A163994C3004A9FE6 /* door_b_open.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

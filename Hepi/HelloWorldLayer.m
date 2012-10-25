@@ -9,6 +9,7 @@
 
 // Import the interfaces
 #import "HelloWorldLayer.h"
+#import "SimpleAudioEngine.h"
 
 // Needed to obtain the Navigation Controller
 #import "AppDelegate.h"
@@ -117,8 +118,10 @@
    // }
     CCNode *door = [batch_ getChildByTag:TagDoor];
     if (door.visible) {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_open.mp3"];
         [self throughKotoba];
     } else {
+        [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_close.mp3"];
         [self disableKotoba];
     }
     door.visible = !door.visible;
