@@ -70,6 +70,12 @@
         door.position = ccp(110, 156);
         [batch_ addChild:door z:20 tag:TagDoor];
 
+        // candlle
+        CCSprite *candle = [CCSprite spriteWithSpriteFrameName:@"candle_1.png"];
+        candle.anchorPoint = ccp(0.5, 0);
+        candle.position = ccp(165, 279);
+        [batch_ addChild:candle z:5];
+
         // yuge
         for (int i = 0; i < 3; ++i) {
             CCSprite *yuge = [CCSprite spriteWithSpriteFrameName:@"yuge_M.png"];
