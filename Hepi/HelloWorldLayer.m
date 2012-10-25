@@ -82,6 +82,31 @@
     return self;
 }
 
+- (void) registerWithTouchDispatcher {
+    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self
+                                                     priority:0
+                                              swallowsTouches:YES];
+}
+
+- (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+   // CGPoint location = [touch locationInView:touch.view];
+   // location = [[CCDirector sharedDirector] convertToGL:location];
+
+   // caughtKid_ = [self.kidTeam movableMemberAtPoint:location];
+   // if (caughtKid_) {
+   //     caughtKid_.state = KarateKidCaught;
+   // }
+    CCNode *door = [batch_ getChildByTag:TagDoor];
+    if (door.visible) {
+        [self throughKotoba];
+    } else {
+        [self disableKotoba];
+    }
+    door.visible = !door.visible;
+    
+    return YES;
+}
+
 #pragma mark GameKit delegate
 
 -(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
@@ -143,7 +168,7 @@
     CGSize winSize = [[CCDirector sharedDirector] winSize];
     CGPoint center = ccp(winSize.width / 2, winSize.height / 2);
 
-    NSString *message = @"広奈さん";
+    NSString *message = @"広奈さんお誕生日おめでとう";
     for (int i = 0; i < message.length; ++i) {
         NSString *spriteFrameName =
             [NSString stringWithFormat:@"%@.png",
@@ -151,6 +176,7 @@
         CCSprite *sprite = (CCSprite *)[batch_ getChildByTag:TagKotoba + i];
         if (!sprite) {
             sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
+            sprite.color = ccc3(76, 186, 235);
             [batch_ addChild:sprite z:20 tag:TagKotoba + i];
         } else {
             [sprite setDisplayFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]
