@@ -7,7 +7,7 @@
             <key>bathroom.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{324,110},{102,162}}</string>
+                <string>{{330,110},{102,162}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,20 +20,20 @@
             <key>candle_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{258,484},{10,40}}</string>
+                <string>{{258,484},{11,40}}</string>
                 <key>offset</key>
-                <string>{0,-1}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{10,40}}</string>
+                <string>{{1,0},{11,40}}</string>
                 <key>sourceSize</key>
-                <string>{14,42}</string>
+                <string>{13,40}</string>
             </dict>
             <key>candle_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{246,500},{10,40}}</string>
+                <string>{{288,497},{10,40}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>candle_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{246,500},{10,40}}</string>
+                <string>{{288,497},{10,40}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -59,7 +59,7 @@
             <key>candle_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{258,484},{10,40}}</string>
+                <string>{{246,500},{10,40}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>candle_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{246,500},{10,40}}</string>
+                <string>{{288,497},{10,40}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>candle_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{246,500},{10,40}}</string>
+                <string>{{288,497},{10,40}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>door.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{324,2},{106,166}}</string>
+                <string>{{330,2},{106,166}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -326,7 +326,7 @@
             <key>size</key>
             <string>{512,512}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d367d71bd5e25473da6b19fbf5a28326$</string>
+            <string>$TexturePacker:SmartUpdate:5ed834897f7af9c358915eaf66b2ae3d$</string>
             <key>textureFileName</key>
             <string>Hepi.png</string>
         </dict>

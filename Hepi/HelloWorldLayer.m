@@ -76,6 +76,19 @@
         candle.position = ccp(165, 279);
         [batch_ addChild:candle z:5];
 
+        NSArray *candleFrames = [NSArray arrayWithObjects:
+                                             [frames spriteFrameByName:@"candle_1.png"],
+                                         [frames spriteFrameByName:@"candle_2.png"],
+                                         [frames spriteFrameByName:@"candle_3.png"],
+                                         [frames spriteFrameByName:@"candle_4.png"],
+                                         [frames spriteFrameByName:@"candle_5.png"],
+                                         [frames spriteFrameByName:@"candle_6.png"],
+                                         nil];
+        CCAnimation *candleAnimation = [CCAnimation animationWithSpriteFrames:candleFrames delay:0.3];
+        CCAnimate *candleAnimate = [CCAnimate actionWithAnimation:candleAnimation];
+        [candle runAction:[CCRepeatForever actionWithAction:candleAnimate]];
+        
+
         // yuge
         for (int i = 0; i < 3; ++i) {
             CCSprite *yuge = [CCSprite spriteWithSpriteFrameName:@"yuge_M.png"];

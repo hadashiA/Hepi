@@ -155,12 +155,12 @@
             <filename>日.png</filename>
             <filename>生.png</filename>
             <filename>誕.png</filename>
-            <filename>candle_1.png</filename>
             <filename>candle_2.png</filename>
             <filename>candle_3.png</filename>
             <filename>candle_4.png</filename>
             <filename>candle_5.png</filename>
             <filename>candle_6.png</filename>
+            <filename>candle_1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

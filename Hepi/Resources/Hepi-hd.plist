@@ -7,7 +7,7 @@
             <key>bathroom.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{662,216},{204,324}}</string>
+                <string>{{658,216},{204,324}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -17,10 +17,88 @@
                 <key>sourceSize</key>
                 <string>{204,324}</string>
             </dict>
+            <key>candle_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{992,24},{20,80}}</string>
+                <key>offset</key>
+                <string>{1,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{20,80}}</string>
+                <key>sourceSize</key>
+                <string>{26,80}</string>
+            </dict>
+            <key>candle_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{632,1002},{20,80}}</string>
+                <key>offset</key>
+                <string>{2,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{20,80}}</string>
+                <key>sourceSize</key>
+                <string>{24,80}</string>
+            </dict>
+            <key>candle_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{632,1002},{20,80}}</string>
+                <key>offset</key>
+                <string>{2,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{20,80}}</string>
+                <key>sourceSize</key>
+                <string>{24,80}</string>
+            </dict>
+            <key>candle_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{992,24},{20,80}}</string>
+                <key>offset</key>
+                <string>{2,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{20,80}}</string>
+                <key>sourceSize</key>
+                <string>{24,80}</string>
+            </dict>
+            <key>candle_5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{632,1002},{20,80}}</string>
+                <key>offset</key>
+                <string>{2,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{20,80}}</string>
+                <key>sourceSize</key>
+                <string>{24,80}</string>
+            </dict>
+            <key>candle_6.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{632,1002},{20,80}}</string>
+                <key>offset</key>
+                <string>{2,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{4,0},{20,80}}</string>
+                <key>sourceSize</key>
+                <string>{24,80}</string>
+            </dict>
             <key>door.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{662,2},{212,332}}</string>
+                <string>{{658,2},{212,332}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -59,7 +137,7 @@
             <key>yuge_M.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{632,1002},{28,20}}</string>
+                <string>{{992,2},{28,20}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -248,7 +326,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:74f60ec360cb61bac6cd076b10ea6428$</string>
+            <string>$TexturePacker:SmartUpdate:6f36935ca8bcb5c7bbe216f07809e82e$</string>
             <key>textureFileName</key>
             <string>Hepi-hd.png</string>
         </dict>
