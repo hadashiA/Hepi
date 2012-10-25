@@ -170,13 +170,24 @@
 
     NSString *message = @"広奈さんお誕生日おめでとう";
     for (int i = 0; i < message.length; ++i) {
+        unsigned char line = floor(i / (message.length - 5)) + 1;
+        unsigned char ch = i % (message.length - 5);
+        unsigned int offset = 0;
+        if (line == 2) {
+            offset = 1.5 * 30;
+        }
+
         NSString *spriteFrameName =
             [NSString stringWithFormat:@"%@.png",
                       [message substringWithRange:NSMakeRange(i, 1)]];
         CCSprite *sprite = (CCSprite *)[batch_ getChildByTag:TagKotoba + i];
         if (!sprite) {
             sprite = [CCSprite spriteWithSpriteFrameName:spriteFrameName];
-            sprite.color = ccc3(76, 186, 235);
+            // if (line <= 1) {
+                sprite.color = ccc3(114, 197, 117);
+            // } else {
+            //     sprite.color = ccc3(222, 118, 15);
+            // }
             [batch_ addChild:sprite z:20 tag:TagKotoba + i];
         } else {
             [sprite setDisplayFrame:[[CCSpriteFrameCache sharedSpriteFrameCache]
@@ -189,7 +200,8 @@
                     [CCSequence actions:[CCDelayTime actionWithDuration:1.0f * (i + 1)],
                                 [CCToggleVisibility action],
                                 [CCMoveTo actionWithDuration:0.5f
-                                                    position:ccp(i * 30 + 50, 350)],
+                                                    position:ccp(ch * 30 + 50 + offset,
+                                                                 400 - (line * 25))],
                                 nil]];
     }
 }

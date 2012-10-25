@@ -143,6 +143,7 @@
             <filename>yuge_L.png</filename>
             <filename>yuge_M.png</filename>
             <filename>yuge_S.png</filename>
+            <filename>う.png</filename>
             <filename>お.png</filename>
             <filename>さ.png</filename>
             <filename>で.png</filename>
@@ -151,10 +152,9 @@
             <filename>ん.png</filename>
             <filename>奈.png</filename>
             <filename>広.png</filename>
+            <filename>日.png</filename>
             <filename>生.png</filename>
             <filename>誕.png</filename>
-            <filename>日.png</filename>
-            <filename>う.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
