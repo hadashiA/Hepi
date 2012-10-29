@@ -112,12 +112,11 @@
    // }
     CCNode *door = [batch_ getChildByTag:TagDoor];
     if (door.visible) {
-        [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_open.mp3"];
+        //[[SimpleAudioEngine sharedEngine] playEffect:@"door_b_open.mp3"];
         [self candleOn];
         [self throughKotoba];
-        lowPassResults_ = 0;
     } else {
-        [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_close.mp3"];
+        //[[SimpleAudioEngine sharedEngine] playEffect:@"door_b_close.mp3"];
         [self disableKotoba];
     }
     door.visible = !door.visible;
@@ -252,7 +251,7 @@
                                      [frames spriteFrameByName:@"candle_5.png"],
                                      [frames spriteFrameByName:@"candle_6.png"],
                                      nil];
-    CCAnimation *candleAnimation = [CCAnimation animationWithSpriteFrames:candleFrames delay:0.3];
+    CCAnimation *candleAnimation = [CCAnimation animationWithSpriteFrames:candleFrames delay:0.2];
     CCAnimate *candleAnimate = [CCAnimate actionWithAnimation:candleAnimation];
     [candle runAction:[CCRepeatForever actionWithAction:candleAnimate]];
 }
@@ -267,6 +266,7 @@
 
 - (void)setupRecorder {
     if (recorder_) {
+        [recorder_ stop];
         [recorder_ release];
         recorder_ = nil;
     }
@@ -297,7 +297,6 @@
     } else {
         CCLOG(@"%@", error.description);        
     }
-    CCLOG(@"setup recorder");
     lowPassResults_ = 0;
 }
 
@@ -305,7 +304,7 @@
     [recorder_ updateMeters];
 
     const double ALPHA = 0.05;
-    double peakPowerForChannel = pow(10, (0.05 * [recorder_ peakPowerForChannel:0]));
+    double peakPowerForChannel = pow(10, (0.05 * ([recorder_ peakPowerForChannel:0])));
     lowPassResults_ = ALPHA * peakPowerForChannel + (1.0 - ALPHA) * lowPassResults_;
     
     CCLOG(@"Average input: %f Peak input: %f Low pass results: %f",
