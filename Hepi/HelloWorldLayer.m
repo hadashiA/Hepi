@@ -20,6 +20,8 @@
 - (void)throughYuge:(CCNode *)sender;
 - (void)throughKotoba;
 - (void)disableKotoba;
+
+- (void)levelTimerCallback:(NSTimer *)timer;
 @end
 
 // HelloWorldLayer implementation
@@ -98,12 +100,39 @@
         }
 
         self.isTouchEnabled = YES;
+
+        // mic
+        NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
+  	NSDictionary *settings =
+            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithFloat: 44100.0],                   AVSampleRateKey,
+                               [NSNumber numberWithInt: kAudioFormatAppleLossless], AVFormatIDKey,
+                               [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
+                               [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
+                          nil];
+
+  	NSError *error;
+
+  	recorder_ = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
+
+  	if (recorder_) {
+            [recorder_ prepareToRecord];
+            recorder_.meteringEnabled = YES;
+            [recorder_ record];
+            levelTimer_ = [NSTimer scheduledTimerWithTimeInterval:0.03
+                                                           target:self
+                                                         selector:@selector(levelTimerCallback:)
+                                                         userInfo: nil
+                                                          repeats: YES];
+  	} else {
+            CCLOG(@"%@", error.description);        
+        }
     }
     return self;
 }
 
 - (void) registerWithTouchDispatcher {
-    [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self
                                                      priority:0
                                               swallowsTouches:YES];
 }
@@ -236,5 +265,29 @@
             child.visible = NO;
         }
     }
+}
+
+- (void)levelTimerCallback:(NSTimer *)timer {
+    [recorder_ updateMeters];
+
+    const double ALPHA = 0.05;
+    double peakPowerForChannel = pow(10, (0.05 * [recorder_ peakPowerForChannel:0]));
+    lowPassResults_ = ALPHA * peakPowerForChannel + (1.0 - ALPHA) * lowPassResults_;
+    
+    // CCLOG(@"Average input: %f Peak input: %f Low pass results: %f",
+    //       [recorder_ averagePowerForChannel:0],
+    //       [recorder_ peakPowerForChannel:0],
+    //       lowPassResults);
+    if (lowPassResults_ > 0.95) {
+        CCLOG(@"Mic blow detected");
+    }
+}	
+
+#pragma mark - memory management
+
+- (void)dealloc {
+    [recorder_ release];
+    [levelTimer_ release];
+    [super dealloc];
 }
 @end

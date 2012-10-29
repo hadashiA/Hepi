@@ -12,6 +12,9 @@
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
 
+#import <AVFoundation/AVFoundation.h>
+#import <CoreAudio/CoreAudioTypes.h>
+
 enum {
     TagBathRoom,
     TagRoom,
@@ -24,6 +27,10 @@ enum {
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer <GKAchievementViewControllerDelegate, GKLeaderboardViewControllerDelegate> {
     CCSpriteBatchNode *batch_;
+
+    AVAudioRecorder *recorder_;
+    NSTimer *levelTimer_;
+    double lowPassResults_;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
