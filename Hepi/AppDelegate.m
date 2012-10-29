@@ -10,6 +10,7 @@
 
 #import "AppDelegate.h"
 #import "HelloWorldLayer.h"
+#import "CDAudioManager.h"
 
 @implementation AppController
 
@@ -82,6 +83,8 @@
 	// make main window visible
 	[window_ makeKeyAndVisible];
 	
+        [CDAudioManager initAsynchronously:kAMM_PlayAndRecord];
+
 	return YES;
 }
 

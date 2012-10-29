@@ -91,6 +91,17 @@
             [self throughYuge:yuge];
         }
 
+        // recorder
+        UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
+        UInt32 audioRouteOverride = kAudioSessionOverrideAudioRoute_Speaker;
+        AudioSessionSetProperty(kAudioSessionProperty_AudioCategory,
+                                sizeof(sessionCategory), &sessionCategory);
+        AudioSessionSetProperty(kAudioSessionProperty_OverrideAudioRoute,
+                                sizeof(audioRouteOverride), &audioRouteOverride);
+        AudioSessionSetActive(true);
+
+        [self setupRecorder];
+
         self.isTouchEnabled = YES;
     }
     return self;
@@ -112,11 +123,11 @@
    // }
     CCNode *door = [batch_ getChildByTag:TagDoor];
     if (door.visible) {
-        //[[SimpleAudioEngine sharedEngine] playEffect:@"door_b_open.mp3"];
+        [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_open.mp3"];
         [self candleOn];
         [self throughKotoba];
     } else {
-        //[[SimpleAudioEngine sharedEngine] playEffect:@"door_b_close.mp3"];
+        [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_close.mp3"];
         [self disableKotoba];
     }
     door.visible = !door.visible;
@@ -221,10 +232,10 @@
                                     position:ccp(ch * 30 + 50 + offset,
                                                  400 - (line * 25))],
                             nil];
-        if (i == message.length - 1) {
-            [actions addObject:[CCCallFunc actionWithTarget:self
-                                                   selector:@selector(setupRecorder)]];
-        }
+        // if (i == message.length - 1) {
+        //     [actions addObject:[CCCallFunc actionWithTarget:self
+        //                                            selector:@selector(setupRecorder)]];
+        // }
         [sprite runAction:[CCSequence actionsWithArray:actions]];
     }
 }
@@ -311,7 +322,7 @@
           [recorder_ averagePowerForChannel:0],
           [recorder_ peakPowerForChannel:0],
           lowPassResults_);
-    if (lowPassResults_ > 0.95) {
+    if (lowPassResults_ > 0.75) {
         CCLOG(@"Mic blow detected");
         [self candleOff];
     }
