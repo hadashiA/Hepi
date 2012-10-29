@@ -6,7 +6,6 @@
 //  Copyright 久保田 竜自 2012年. All rights reserved.
 //
 
-
 // Import the interfaces
 #import "HelloWorldLayer.h"
 #import "SimpleAudioEngine.h"
@@ -21,6 +20,10 @@
 - (void)throughKotoba;
 - (void)disableKotoba;
 
+- (void)candleOn;
+- (void)candleOff;
+
+- (void)setupRecorder;
 - (void)levelTimerCallback:(NSTimer *)timer;
 @end
 
@@ -77,20 +80,9 @@
         CCSprite *candle = [CCSprite spriteWithSpriteFrameName:@"candle_1.png"];
         candle.anchorPoint = ccp(0.5, 0);
         candle.position = ccp(165, 279);
-        [batch_ addChild:candle z:5];
+        [batch_ addChild:candle z:5 tag:TagCandle];
 
-        NSArray *candleFrames = [NSArray arrayWithObjects:
-                                             [frames spriteFrameByName:@"candle_1.png"],
-                                         [frames spriteFrameByName:@"candle_2.png"],
-                                         [frames spriteFrameByName:@"candle_3.png"],
-                                         [frames spriteFrameByName:@"candle_4.png"],
-                                         [frames spriteFrameByName:@"candle_5.png"],
-                                         [frames spriteFrameByName:@"candle_6.png"],
-                                         nil];
-        CCAnimation *candleAnimation = [CCAnimation animationWithSpriteFrames:candleFrames delay:0.3];
-        CCAnimate *candleAnimate = [CCAnimate actionWithAnimation:candleAnimation];
-        [candle runAction:[CCRepeatForever actionWithAction:candleAnimate]];
-        
+        [self candleOn];
 
         // yuge
         for (int i = 0; i < 3; ++i) {
@@ -100,33 +92,6 @@
         }
 
         self.isTouchEnabled = YES;
-
-        // mic
-        NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
-  	NSDictionary *settings =
-            [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSNumber numberWithFloat: 44100.0],                   AVSampleRateKey,
-                               [NSNumber numberWithInt: kAudioFormatAppleLossless], AVFormatIDKey,
-                               [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
-                               [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
-                          nil];
-
-  	NSError *error;
-
-  	recorder_ = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
-
-  	if (recorder_) {
-            [recorder_ prepareToRecord];
-            recorder_.meteringEnabled = YES;
-            [recorder_ record];
-            levelTimer_ = [NSTimer scheduledTimerWithTimeInterval:0.03
-                                                           target:self
-                                                         selector:@selector(levelTimerCallback:)
-                                                         userInfo: nil
-                                                          repeats: YES];
-  	} else {
-            CCLOG(@"%@", error.description);        
-        }
     }
     return self;
 }
@@ -148,7 +113,9 @@
     CCNode *door = [batch_ getChildByTag:TagDoor];
     if (door.visible) {
         [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_open.mp3"];
+        [self candleOn];
         [self throughKotoba];
+        lowPassResults_ = 0;
     } else {
         [[SimpleAudioEngine sharedEngine] playEffect:@"door_b_close.mp3"];
         [self disableKotoba];
@@ -247,13 +214,19 @@
         sprite.visible = NO;
         sprite.position = center;
 
-        [sprite runAction:
-                    [CCSequence actions:[CCDelayTime actionWithDuration:1.0f * (i + 1)],
-                                [CCToggleVisibility action],
-                                [CCMoveTo actionWithDuration:0.5f
-                                                    position:ccp(ch * 30 + 50 + offset,
-                                                                 400 - (line * 25))],
-                                nil]];
+        NSMutableArray *actions =
+            [NSMutableArray arrayWithObjects:
+                                [CCDelayTime actionWithDuration:1.0f * (i + 1)],
+                            [CCToggleVisibility action],
+                [CCMoveTo actionWithDuration:0.5f
+                                    position:ccp(ch * 30 + 50 + offset,
+                                                 400 - (line * 25))],
+                            nil];
+        if (i == message.length - 1) {
+            [actions addObject:[CCCallFunc actionWithTarget:self
+                                                   selector:@selector(setupRecorder)]];
+        }
+        [sprite runAction:[CCSequence actionsWithArray:actions]];
     }
 }
 
@@ -267,6 +240,67 @@
     }
 }
 
+- (void)candleOn {
+    CCNode *candle = [batch_ getChildByTag:TagCandle];
+    CCSpriteFrameCache *frames = [CCSpriteFrameCache sharedSpriteFrameCache];
+    
+    NSArray *candleFrames = [NSArray arrayWithObjects:
+                                         [frames spriteFrameByName:@"candle_1.png"],
+                                     [frames spriteFrameByName:@"candle_2.png"],
+                                     [frames spriteFrameByName:@"candle_3.png"],
+                                     [frames spriteFrameByName:@"candle_4.png"],
+                                     [frames spriteFrameByName:@"candle_5.png"],
+                                     [frames spriteFrameByName:@"candle_6.png"],
+                                     nil];
+    CCAnimation *candleAnimation = [CCAnimation animationWithSpriteFrames:candleFrames delay:0.3];
+    CCAnimate *candleAnimate = [CCAnimate actionWithAnimation:candleAnimation];
+    [candle runAction:[CCRepeatForever actionWithAction:candleAnimate]];
+}
+
+- (void)candleOff {
+    CCNode *candle = [batch_ getChildByTag:TagCandle];
+    CCSpriteFrameCache *frames = [CCSpriteFrameCache sharedSpriteFrameCache];
+
+    [candle stopAllActions];
+    [(CCSprite *)candle setDisplayFrame:[frames spriteFrameByName:@"candle_0.png"]];
+}
+
+- (void)setupRecorder {
+    if (recorder_) {
+        [recorder_ release];
+        recorder_ = nil;
+    }
+
+    // mic
+    NSURL *url = [NSURL fileURLWithPath:@"/dev/null"];
+    NSDictionary *settings =
+        [NSDictionary dictionaryWithObjectsAndKeys:
+                         [NSNumber numberWithFloat: 44100.0],                   AVSampleRateKey,
+                           [NSNumber numberWithInt: kAudioFormatAppleLossless], AVFormatIDKey,
+                           [NSNumber numberWithInt: 1],                         AVNumberOfChannelsKey,
+                           [NSNumber numberWithInt: AVAudioQualityMax],         AVEncoderAudioQualityKey,
+                      nil];
+
+    NSError *error;
+
+    recorder_ = [[AVAudioRecorder alloc] initWithURL:url settings:settings error:&error];
+    
+    if (recorder_) {
+        [recorder_ prepareToRecord];
+        recorder_.meteringEnabled = YES;
+        [recorder_ record];
+        levelTimer_ = [NSTimer scheduledTimerWithTimeInterval:0.03
+                                                       target:self
+                                                     selector:@selector(levelTimerCallback:)
+                                                     userInfo: nil
+                                                      repeats: YES];
+    } else {
+        CCLOG(@"%@", error.description);        
+    }
+    CCLOG(@"setup recorder");
+    lowPassResults_ = 0;
+}
+
 - (void)levelTimerCallback:(NSTimer *)timer {
     [recorder_ updateMeters];
 
@@ -274,12 +308,13 @@
     double peakPowerForChannel = pow(10, (0.05 * [recorder_ peakPowerForChannel:0]));
     lowPassResults_ = ALPHA * peakPowerForChannel + (1.0 - ALPHA) * lowPassResults_;
     
-    // CCLOG(@"Average input: %f Peak input: %f Low pass results: %f",
-    //       [recorder_ averagePowerForChannel:0],
-    //       [recorder_ peakPowerForChannel:0],
-    //       lowPassResults);
+    CCLOG(@"Average input: %f Peak input: %f Low pass results: %f",
+          [recorder_ averagePowerForChannel:0],
+          [recorder_ peakPowerForChannel:0],
+          lowPassResults_);
     if (lowPassResults_ > 0.95) {
         CCLOG(@"Mic blow detected");
+        [self candleOff];
     }
 }	
 

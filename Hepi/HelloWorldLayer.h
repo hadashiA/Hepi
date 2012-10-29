@@ -19,6 +19,7 @@ enum {
     TagBathRoom,
     TagRoom,
     TagDoor,
+    TagCandle,
     TagBatch,
     TagYuge,
     TagKotoba,

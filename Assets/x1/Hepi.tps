@@ -161,6 +161,7 @@
             <filename>candle_5.png</filename>
             <filename>candle_6.png</filename>
             <filename>candle_1.png</filename>
+            <filename>candle_0.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -17,6 +17,19 @@
                 <key>sourceSize</key>
                 <string>{204,324}</string>
             </dict>
+            <key>candle_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{992,106},{16,68}}</string>
+                <key>offset</key>
+                <string>{-2,-6}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{4,12},{16,68}}</string>
+                <key>sourceSize</key>
+                <string>{28,80}</string>
+            </dict>
             <key>candle_1.png</key>
             <dict>
                 <key>frame</key>
@@ -326,7 +339,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:6f36935ca8bcb5c7bbe216f07809e82e$</string>
+            <string>$TexturePacker:SmartUpdate:7943068b21d81919d828bbf7adf57f9b$</string>
             <key>textureFileName</key>
             <string>Hepi-hd.png</string>
         </dict>
